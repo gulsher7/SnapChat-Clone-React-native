@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import Home from './src/Home/Home'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import Routes from './src/Navigations/Routes';
+import store from './src/redux/store';
+
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <Routes />
-    </View>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <Routes />
+      </SafeAreaProvider>
+    </Provider>
   );
 };
 

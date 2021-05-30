@@ -9,7 +9,8 @@ const BtnComp = ({
     btnText,
     onPress,
     btnStyle,
-    textStyle
+    textStyle,
+    isDisable = false
 }) => {
 
     return (
@@ -17,6 +18,7 @@ const BtnComp = ({
             style={{ ...styles.btnStyle, ...btnStyle }}
             onPress={onPress}
             activeOpacity={0.8}
+            disabled={isDisable}
         >
             <Text style={{...styles.textStyle, ...textStyle}}>{btnText}</Text>
         </TouchableOpacity>

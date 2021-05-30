@@ -1,5 +1,5 @@
 //import liraries
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 //constants
 import strings from '../../constants/lang';
@@ -9,17 +9,33 @@ import Header from '../../Components/Header';
 import TextinputWithLable from '../../Components/TextinputWithLable';
 import WrapperContainer from '../../Components/WrapperContainer';
 import BtnComp from '../../Components/BtnComp';
+import colors from '../../styles/colors';
+import actions from '../../redux/actions';
 
 const Login = () => {
     const [state, setState] = useState({
         isLoading: false,
         email: '',
         password: '',
-        isSecure: true
+        isSecure: true,
+        isEnable: false
     })
-    const { isLoading, email, password, isSecure } = state
+    const { isLoading, email, password, isSecure, isEnable } = state
 
     const updateState = (data) => setState((state) => ({ ...state, ...data }))
+
+    useEffect(() => {
+        if (email !== '' && password !== '') {
+            updateState({ isEnable: true })
+            return;
+        }
+        updateState({ isEnable: false })
+    }, [email, password])
+
+    const onLogin = () => {
+        actions.login(true)
+        alert("Login Success!!!")
+    }
 
     return (
         <WrapperContainer isLoading={isLoading}>
@@ -27,7 +43,7 @@ const Login = () => {
             <View style={{ flex: 1, justifyContent: 'space-between' }}>
                 <View>
 
-                <Text style={styles.headingText}>{strings.LOGIN}</Text>
+                    <Text style={styles.headingText}>{strings.LOGIN}</Text>
                     <TextinputWithLable
                         label={strings.USERNAME_OR_EMAIL}
                         value={email}
@@ -48,9 +64,11 @@ const Login = () => {
                     </TouchableOpacity>
                 </View>
                 <BtnComp
-                    btnStyle={styles.btnStyle}
+                    isDisable={!isEnable}
+                    btnStyle={{ ...styles.btnStyle, backgroundColor: isEnable ? colors.blue : colors.blackOpacity20 }}
                     btnText={strings.LOGIN}
                     textStyle={styles.textStyle}
+                    onPress={onLogin}
                 />
             </View>
         </WrapperContainer>
