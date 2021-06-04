@@ -18,5 +18,11 @@ export default {
     PRIVACY_POLICY:"Privacy Policy",
     AND_AGREE_TO_THE:"and agree to the",
     TERMS_OF_SERVICE:"Terms of Service",
-
+    CHAT: "Chat",
+    STORIES:"Stories",
+    QUICK_ADD:"Quick Add",
+    SUBSCRIPTION:"Subscription",
+    DISCOVER:"Discover",
+    FRIENDS:"Friends",
+    MY_BITMOJI:"My Bitmoji",
 }

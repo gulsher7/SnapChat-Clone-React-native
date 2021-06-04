@@ -11,10 +11,11 @@ const WrapperContainer = ({
     barStyle = "dark-content",
     statusBarColor = colors.white,
     children,
-    isLoading
+    isLoading,
+    style = {},
 }) => {
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, ...style}}>
             <StatusBar barStyle={barStyle} backgroundColor={statusBarColor} />
             <SafeAreaView style={{flex:1}}>
                 {children}

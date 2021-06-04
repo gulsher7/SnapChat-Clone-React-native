@@ -15,7 +15,8 @@ const HomeHeader = ({
     onPress,
     headerStyle,
     centerText,
-    lastImg = imagePath.icMore
+    lastImg = imagePath.icMore,
+    setting
 }) => {
     const navigation = useNavigation()
     return (
@@ -29,10 +30,14 @@ const HomeHeader = ({
             </View>
             <Text style={styles.textStyle}>{centerText}</Text>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={{ marginRight: moderateScale(16) }} source={imagePath.icAdd} />
-                <Image source={lastImg} />
-            </View>
+            {!!setting ?
+                <TouchableOpacity>
+                    <Image source={setting} />
+                </TouchableOpacity>
+            : <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image style={{ marginRight: moderateScale(16) }} source={imagePath.icAdd} />
+                    <Image source={lastImg} />
+                </View>}
         </View>
     );
 };

@@ -10,4 +10,7 @@ export default {
     icSearch: require('../assets/images/ic_search.png'),
     icAdd: require('../assets/images/ic_add.png'),
     icMore: require('../assets/images/ic_more.png'),
+    icClose: require("../assets/images/close.png"),
+    icNavigation: require("../assets/images/navigation.png"),
+    icSetting : require("../assets/images/ic_setting.png"),
 }

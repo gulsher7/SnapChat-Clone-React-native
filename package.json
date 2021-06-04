@@ -20,6 +20,7 @@
     "react-native": "0.64.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-localization": "^2.1.7",
+    "react-native-maps": "^0.28.0",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
