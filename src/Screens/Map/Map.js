@@ -1,7 +1,7 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Circulerbtn from '../../Components/CirculerBtn';
 import HomeHeader from '../../Components/HomeHeader';
 import RoundImg from '../../Components/RoundImg';
@@ -10,26 +10,58 @@ import strings from '../../constants/lang';
 import colors from '../../styles/colors';
 import commonStyles from '../../styles/commonStyles';
 import { moderateScale } from '../../styles/responsiveSize';
+import { getAddressFromLatLong } from '../../utils/helperFunctions';
+import { data } from './data';
 
 
 // create a component
 const Map = () => {
+    const [curLoc, setCurLoc] = useState({
+        latitude: 30.7993,
+        longitude: 76.9149,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+    })
+    const [address, setAddress] = useState('')
+
+    const mapRef = useRef(null)
+
+    const onCenter = () => {
+        console.log(mapRef)
+        mapRef.current.animateToRegion(curLoc)
+    }
+
+    const onRegionChange = async(props) =>{
+        // console.log("props==>>>",props)
+        const {latitude, longitude} = props
+        const res = await getAddressFromLatLong(`${latitude}, ${longitude}`)
+        console.log("res==>>>>>",res)
+        setAddress(res.address)
+
+    }
     return (
         <View style={{ flex: 1 }}>
             <MapView
+                ref={mapRef}
                 style={StyleSheet.absoluteFill}
-                initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            />
+                initialRegion={curLoc}
+                onRegionChangeComplete={onRegionChange}
+            >
+
+                {data.map((val, i) => {
+                    return (
+                        <Marker
+                            coordinate={val.coords}
+                            image={val.img}
+                        />
+                    )
+                })}
+            </MapView>
 
             <View style={styles.headerView}>
                 <HomeHeader
                     setting={imagePath.icSetting}
-                    centerText="Panchkula"
+                    centerText={address}
                 />
             </View>
             <View style={styles.bottomView}>
@@ -38,7 +70,7 @@ const Map = () => {
                         text={strings.MY_BITMOJI}
                     />
 
-                    <TouchableOpacity style={styles.navigationView}>
+                    <TouchableOpacity onPress={onCenter} style={styles.navigationView}>
                         <Image source={imagePath.icNavigation} />
                     </TouchableOpacity>
 

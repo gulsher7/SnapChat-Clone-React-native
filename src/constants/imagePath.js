@@ -13,4 +13,10 @@ export default {
     icClose: require("../assets/images/close.png"),
     icNavigation: require("../assets/images/navigation.png"),
     icSetting : require("../assets/images/ic_setting.png"),
+    //bitemoji
+    emoji1: require('../assets/images/bitemoji/emoji1.png'),
+    emoji2: require('../assets/images/bitemoji/emoji2.png'),
+    emoji3: require('../assets/images/bitemoji/emoji3.png'),
+    emoji4: require('../assets/images/bitemoji/emoji4.png'),
+    emoji5: require('../assets/images/bitemoji/emoji5.png'),
 }

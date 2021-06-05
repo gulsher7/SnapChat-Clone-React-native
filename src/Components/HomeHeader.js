@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         ...commonStyles.fontSize20,
-        fontFamily: fontFamily.bold
-
+        fontFamily: fontFamily.bold,
+        flex:1,
     }
 });
 
